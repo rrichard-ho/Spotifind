@@ -1,7 +1,7 @@
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth
 
-from flask import Flask, request, url_for, session, redirect
+from flask import Flask, request, url_for, session, redirect, render_template
 
 app = Flask(__name__)
 
@@ -30,9 +30,15 @@ def redirect_page():
 
 @app.route('/home')
 def home_page():
-    return 'home page'
+    return render_template('index.html')
 
-@app.route('/recommend')
+@app.route('/page1')
+def page1():
+    return 'Welcome to Page 1!'
+
+@app.route('/page2')
+def page2():
+    return 'Welcome to Page 2!'
 
 def create_spotify_oauth():
     return SpotifyOAuth(
