@@ -12,6 +12,10 @@ CLIENT_ID = '527201037c544da2886c1a92b00bfb3d'
 CLIENT_SECRET = 'c33daf1b48d147c1b503dcb98b6c454f'
 
 @app.route('/')
+def index():
+    return render_template('landing.html')
+
+@app.route('/login')
 def login():
     sp_oauth = create_spotify_oauth()
     auth_url = sp_oauth.get_authorize_url()

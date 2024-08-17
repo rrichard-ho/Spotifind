@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotifind</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class = "hero">
+        <div class="content">
+            <h1 class="anim"> Spotifind</h1>
+            <a href="{{ url_for('login') }}" class="login-btn anim">Sign into Spotify</a>
+        </div>
+    </div>
+</body>
+</html>
