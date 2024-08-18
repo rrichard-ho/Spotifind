@@ -1,54 +1,56 @@
 * {
-
-    background-color: black;
-    color: #1DB954;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
 }
 
-.hero {
-    height: 100%;
-    margin: 0;
+body {
     display: flex;
     justify-content: center;
     align-items: center;
+    min-height: 100vh;
+    background-color: #0c0d0e;
+    text-align: center;
 }
 
 .content {
-    width: 600px; /* Adjust size as needed */
-    height: 600px; /* Adjust size as needed */
-    background-color: red; /* Color for the box */
-    margin-top: 20px; /* Space between content and box */
-    display: block;
+    width: 420px;
 
 }
 
 .content h1{
-    font-size: 70px;
+    font-size: 40px;
+    transform: translateY(-25%);
     color: white;
-    text-align: center;
+    margin-bottom: 30px;
     
 }
 
-.login-btn {
-    display: inline-block;
-    text-decoration: none;
-    padding: 15px 80px;
-    color: #fff;
-    background-image: linear-gradient(45deg, #df4881, #c430d7);
-    font-size: 40px;
-    border-radius: 30px;
-    border-top-right-radius: 0;
+.content .login-btn {
+    height: 45px;
+    background: #1DB954;;
+    border: none;
+    outline: none;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
     cursor: pointer;
-    transition: 0.2s;
-}
-.login-btn:hover {
-    border-top-right-radius: 30px;
+    font-size: 16px;
+    color: black;
+    font-weight: 600;
+    padding: 15px 60px;
+    text-decoration: none;
+
 }
 
-.anim {
+.content .login-btn:hover {
+    background: #248847;
+}
+
+.content .anim {
     opacity: 0;
     transform: translateY(30px);
-    animation: moveup 0.5s linear forwards;
+    animation: moveup 0.3s linear forwards;
 }
 @keyframes moveup {
     100%{
@@ -57,27 +59,8 @@
     }
 }
 
-button {
-    display: inline-block;
-    text-decoration: none;
-    padding: 14px 40px;
-    color: #fff;
-    background-image: linear-gradient(45deg, #df4881, #c430d7);
-    font-size: 14px;
-    border-radius: 30px;
-    border-top-right-radius: 0;
-    cursor: pointer;
-}
-
-/* Button hover effect */
-button:hover {
-    background-color: #45a049;  /* Darker green on hover */
-}
-
-/* Center button on the page */
-.center-button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh; /* Center vertically */
+.content i {
+    font-size: 24px;
+    margin-right: 3px;
+    vertical-align: middle;
 }
