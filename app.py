@@ -34,6 +34,7 @@ def redirect_page():
 
 @app.route('/home')
 def home_page():
+    user = 'Richard'
     return render_template('index.html')
 
 @app.route('/page1')

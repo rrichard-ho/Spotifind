@@ -7,13 +7,16 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <h1>Welcome to the Home Page</h1>
-    <form action="{{ url_for('page1') }}">
-        <button type="submit">Go to Page 1</button>
-    </form>
-    <br>
-    <form action="{{ url_for('page2') }}">
-        <button type="submit">Go to Page 2</button>
-    </form>
+    <div class="home">
+        <h1>Spotifind</h1>
+        <h2>Hello user</h2>
+        <h3>What would you like to do today?</h3>
+        <form action="{{ url_for('page1') }}">
+            <button type="submit">Recommend me songs</button>
+        </form>
+        <form action="{{ url_for('page2') }}">
+            <button type="submit">Stats</button>
+        </form>
+    </div>
 </body>
 </html>
