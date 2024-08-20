@@ -8,15 +8,15 @@
 </head>
 <body>
     <div class="home">
-        <h1>Spotifind</h1>
-        <h2>Hello user</h2>
-        <h3>What would you like to do today?</h3>
-        <form action="{{ url_for('page1') }}">
-            <button type="submit">Recommend me songs</button>
-        </form>
-        <form action="{{ url_for('page2') }}">
-            <button type="submit">Stats</button>
-        </form>
+            <nav>
+                <h1><a href="{{ url_for('home_page') }}">Spotifind</a></h1>
+            </nav>
+        <div class="home_content">
+            <h2>Hello, {{ user }}</h2>
+            <p>What would you like to do today?</p>
+            <a href="{{ url_for('page1') }}" class="btn">Recommend me songs</a>
+            <a href="{{ url_for('page2') }}" class="btn">Stats</a>
+        </div>
     </div>
 </body>
 </html>
