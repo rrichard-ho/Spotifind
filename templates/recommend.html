@@ -11,11 +11,13 @@
             <nav>
                 <h1><a href="{{ url_for('home_page') }}">Spotifind</a></h1>
             </nav>
-        <div class="home_content">
-            <h2>Good {{ greeting }}, {{ user_name }}</h2>
-            <p>What would you like to do today?</p>
-            <a href="{{ url_for('recommend') }}" class="btn">Recommend me songs</a>
-            <a href="{{ url_for('stats') }}" class="btn">Show me my stats</a>
+        <div class="recommend_content">
+            <h2>Song Recommender</h2>
+            <p>Enter song URI:</p>
+            <div class="input_box">
+                <input type="text" placeholder="Song URI">
+            </div>
+            <p>or choose from your most listened</p>
         </div>
     </div>
 </body>

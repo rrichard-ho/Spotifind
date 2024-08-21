@@ -81,7 +81,7 @@ body {
 }
 
 .home .home_content {
-    margin-top: 14%;
+    margin-top: 7%;
     color: #fff;
     max-width: 620px;
 }
@@ -101,7 +101,7 @@ body {
 }
 
 .home .home_content .btn {
-    display: inline-block;
+    display: flex;
     flex-direction: column;
     align-items: center;
     padding: 10px 20px;
@@ -120,4 +120,28 @@ body {
 
 .home .home_content .btn:hover {
     background: #248847;
+}
+
+.home .recommend_content {
+    margin-top: 7%;
+    color: #fff;
+    max-width: 620px;
+}
+
+.home .recommend_content h2 {
+    font-size: 50px;
+    font-weight: 600;
+    line-height: 85px;
+    margin-bottom: 15px;
+    color: #1DB954;
+
+}
+
+.home .recommend_content p {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.home .recommend_content .input_box {
+    margin-bottom: 20px;
 }

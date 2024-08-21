@@ -1,4 +1,4 @@
-import spotipy
+import spotipy, time
 from spotipy.oauth2 import SpotifyOAuth
 
 from flask import Flask, request, url_for, session, redirect, render_template
@@ -34,15 +34,25 @@ def redirect_page():
 
 @app.route('/home')
 def home_page():
-    user_name = 'Richard'
-    return render_template('index.html', user=user_name)
+    try:
+        token_info = get_token()
+    except:
+        return redirect('/')
+    
+    sp = spotipy.Spotify(auth=token_info['access_token'])
 
-@app.route('/page1')
-def page1():
-    return 'Welcome to Page 1!'
+    current_user = sp.current_user()
+    display_name = current_user.get('display_name')
+    greeting = get_greeting()
 
-@app.route('/page2')
-def page2():
+    return render_template('index.html', greeting = greeting, user_name=display_name)
+
+@app.route('/recommend')
+def recommend():
+    return render_template('recommend.html')
+
+@app.route('/stats')
+def stats():
     return 'Welcome to Page 2!'
 
 def create_spotify_oauth():
@@ -52,3 +62,29 @@ def create_spotify_oauth():
         redirect_uri = url_for('redirect_page', _external = True),
         scope = 'user-library-read user-top-read playlist-modify-private playlist-modify-public'
     )
+
+def get_greeting():
+    current_hour = time.localtime().tm_hour
+    if (current_hour < 4):
+        return 'night'
+    elif (current_hour < 12):
+        return 'morning'
+    elif (current_hour < 17):
+        return 'afternoon'
+    elif (current_hour < 20):
+        return 'evening'
+    else: 
+        return 'night'
+
+def get_token():
+    token_info = session.get(TOKEN_INFO, None)
+    if not token_info:
+        redirect(url_for('login', external=False))
+
+    now = int(time.time())
+
+    is_expired = token_info['expires_at'] - now < 60
+    if (is_expired):
+        spotify_oauth = create_spotify_oauth()
+        token_info = spotify_oauth.refresh_access_token(token_info['refresh_token'])
+    return token_info
