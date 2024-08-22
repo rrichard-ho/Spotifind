@@ -47,9 +47,17 @@ def home_page():
 
     return render_template('index.html', greeting = greeting, user_name=display_name)
 
-@app.route('/recommend')
+@app.route('/recommend', methods=['GET', 'POST'])
 def recommend():
-    return render_template('recommend.html')
+    if request.method == 'POST':
+        song_uri = request.form['song_uri']
+        return redirect(url_for('recommend_success', uri=song_uri))
+    else:
+        return render_template('recommend.html')
+
+@app.route('/<uri>')
+def recommend_success(uri):
+    return f"<h1>{uri}</h1>"
 
 @app.route('/stats')
 def stats():
