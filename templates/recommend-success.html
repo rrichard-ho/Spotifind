@@ -11,16 +11,8 @@
             <nav>
                 <h1><a href="{{ url_for('home_page') }}">Spotifind</a></h1>
             </nav>
-            <style>
-            body {
-                background-image: url('{{ pfp_link }}');
-            }
-            </style>
-        <div class="home_content">
-            <h2>Good {{ greeting }}, {{ user_name }}</h2>
-            <p>What would you like to do today?</p>
-            <a href="{{ url_for('recommend') }}" class="btn">Recommend me songs</a>
-            <a href="{{ url_for('stats') }}" class="btn">Show me my stats</a>
+        <div class="recommend_success_box">
+            <h1>success!</h1>
         </div>
     </div>
 </body>

@@ -12,6 +12,9 @@
                 <h1><a href="{{ url_for('home_page') }}">Spotifind</a></h1>
             </nav>
         <div class="recommend_content">
+            {% if error_message %}
+            <p style="color:red;">{{ error_message }}</p>
+            {% endif %}
             <h2>Song Recommender</h2>
             <p>Enter song URI:</p>
             <form action="#" method="post">

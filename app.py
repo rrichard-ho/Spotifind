@@ -1,4 +1,4 @@
-import spotipy, time
+import spotipy, time, re
 from spotipy.oauth2 import SpotifyOAuth
 
 from flask import Flask, request, url_for, session, redirect, render_template
@@ -43,21 +43,37 @@ def home_page():
 
     current_user = sp.current_user()
     display_name = current_user.get('display_name')
+    # print(f"{current_user}")
+    profile_pic = current_user.get('images')[0].get('url')
+    print(profile_pic)
     greeting = get_greeting()
 
-    return render_template('index.html', greeting = greeting, user_name=display_name)
+    return render_template('index.html', greeting = greeting, user_name=display_name, pfp_link=profile_pic)
 
 @app.route('/recommend', methods=['GET', 'POST'])
 def recommend():
     if request.method == 'POST':
         song_uri = request.form['song_uri']
+        if not valid_track_uri(song_uri):
+            return render_template('recommend.html', error_message="Invalid Spotify track URI. Please try again.")
         return redirect(url_for('recommend_success', uri=song_uri))
     else:
         return render_template('recommend.html')
 
 @app.route('/<uri>')
 def recommend_success(uri):
-    return f"<h1>{uri}</h1>"
+    try:
+        token_info = get_token()
+    except:
+        return redirect('/')
+    
+    sp = spotipy.Spotify(auth=token_info['access_token'])
+
+    list = sp.recommendations(seed_tracks=[uri], limit=30)
+    for idx, track in enumerate(list['tracks']):
+        print(f"{idx + 1}: {track['name']} by {track['artists'][0]['name']}")
+
+    return render_template('recommend-success.html')
 
 @app.route('/stats')
 def stats():
@@ -83,6 +99,15 @@ def get_greeting():
         return 'evening'
     else: 
         return 'night'
+    
+def valid_track_uri(uri):
+    pattern = r'^spotify:track:[A-Za-z0-9]{22}$'
+    return re.match(pattern, uri)
+
+def valid_artist_uri(uri):
+    pattern = r'^spotify:artist:[A-Za-z0-9]{22}$'
+    return re.match(pattern, uri)
+
 
 def get_token():
     token_info = session.get(TOKEN_INFO, None)
