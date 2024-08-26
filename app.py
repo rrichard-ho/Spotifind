@@ -43,7 +43,6 @@ def home_page():
 
     current_user = sp.current_user()
     display_name = current_user.get('display_name')
-    # print(f"{current_user}")
     profile_pic = current_user.get('images')[0].get('url')
     print(profile_pic)
     greeting = get_greeting()
@@ -69,11 +68,13 @@ def recommend_success(uri):
     
     sp = spotipy.Spotify(auth=token_info['access_token'])
 
+    seed_track = sp.track(track_id=uri)
     list = sp.recommendations(seed_tracks=[uri], limit=30)
+
     for idx, track in enumerate(list['tracks']):
         print(f"{idx + 1}: {track['name']} by {track['artists'][0]['name']}")
-
-    return render_template('recommend-success.html')
+    print(seed_track)
+    return render_template('recommend-success.html', seed_track=seed_track)
 
 @app.route('/stats')
 def stats():

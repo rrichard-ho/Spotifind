@@ -11,8 +11,22 @@
             <nav>
                 <h1><a href="{{ url_for('home_page') }}">Spotifind</a></h1>
             </nav>
+            
         <div class="recommend_success_box">
-            <h1>success!</h1>
+            <div class="seed_track">
+                <img src="{{ seed_track['album']['images'][0]['url'] }}" alt="seed_track_pic" class="seed_track_pfp">
+                <div class="text">
+                    <h1>{{ seed_track['name'] }}</h1>
+                    <div class="subtitles">
+                        {% for artist in seed_track['artists'] %}
+                            <h2>{{ artist['name'] }}</h2>
+                        {% endfor %}
+                    </div>
+                    <audio controls>
+                        <source src="{{ seed_track['preview_url'] }}" type="audio/mpeg">
+                    </audio>
+                </div>
+            </div>
         </div>
     </div>
 </body>

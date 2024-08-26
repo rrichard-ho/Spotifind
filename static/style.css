@@ -164,3 +164,36 @@ body {
     outline: none;
     border-color: transparent;
 }
+
+.home .recommend_success_box .seed_track {
+    margin-top: 75px;
+    display: flex;
+    gap: 20px;
+
+}
+
+.home .recommend_success_box .seed_track .seed_track_pfp {
+    width: 200px;
+    height: 200px;
+}
+
+.home .recommend_success_box .seed_track .text {
+    flex-direction: column;
+}
+
+.home .recommend_success_box .seed_track .text h1{
+    margin-top: 50px;
+    font-size: 50px;
+    margin: 0;
+}
+
+.home .recommend_success_box .seed_track .text .subtitles {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.home .recommend_success_box .seed_track .text .subtitles h2{
+    margin: 0;
+    gap: 10px; 
+}
