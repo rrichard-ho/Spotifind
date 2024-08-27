@@ -197,3 +197,29 @@ body {
     margin: 0;
     gap: 10px; 
 }
+
+.home .recommend_success_box .seed_track .text .songs {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.home .recommend_success_box .seed_track .text .songs .cover_pic {
+    width: 64px;
+    height: 64px;
+}
+
+.home .recommend_success_box .seed_track .text .songs_text {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.home .recommend_success_box .seed_track .text .songs_text h1 {
+    font-size: 24px;
+}
+
+.home .recommend_success_box .seed_track .text .songs_text h2 {
+    font-size: 16px;
+}

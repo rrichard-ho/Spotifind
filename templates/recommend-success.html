@@ -25,6 +25,18 @@
                     <audio controls>
                         <source src="{{ seed_track['preview_url'] }}" type="audio/mpeg">
                     </audio>
+                    <div class="songs">
+                        {% for track in list['tracks'] %}
+                            <img src="{{ track['album']['images'][0]['url'] }}" alt="cover_pic" class="cover_pic">
+
+                            <div class="songs_text">
+                                <h1>{{ track['name'] }}</h1>
+                                {% for artist in track['artists'] %}
+                                    <h2>{{ artist['name'] }}</h2>
+                                {% endfor %}
+                            </div>
+                        {% endfor %}
+                    </div>
                 </div>
             </div>
         </div>

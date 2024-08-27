@@ -71,10 +71,9 @@ def recommend_success(uri):
     seed_track = sp.track(track_id=uri)
     list = sp.recommendations(seed_tracks=[uri], limit=30)
 
-    for idx, track in enumerate(list['tracks']):
-        print(f"{idx + 1}: {track['name']} by {track['artists'][0]['name']}")
-    print(seed_track)
-    return render_template('recommend-success.html', seed_track=seed_track)
+    # for idx, track in enumerate(list['tracks']):
+    #     print(f"{idx + 1}: {track['name']} by {track['artists'][0]['name']}")
+    return render_template('recommend-success.html', seed_track=seed_track,list=list)
 
 @app.route('/stats')
 def stats():
