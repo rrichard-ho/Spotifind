@@ -198,28 +198,23 @@ body {
     gap: 10px; 
 }
 
-.home .recommend_success_box .seed_track .text .songs {
+.home .recommend_success_box .track-list {
     display: flex;
-    flex-direction: column;
-    gap: 20px;
+    padding: 20px;
 }
 
-.home .recommend_success_box .seed_track .text .songs .cover_pic {
-    width: 64px;
-    height: 64px;
+.home .recommend_success_box .track-list .cover_pic {
+    width: 75px;
+    height: 75px;
 }
 
-.home .recommend_success_box .seed_track .text .songs_text {
+.home .recommend_success_box .text .track-list .track-item {
     display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    gap: 20px;
+    flex-direction: row;
+    align-items: center;
 }
 
-.home .recommend_success_box .seed_track .text .songs_text h1 {
-    font-size: 24px;
-}
-
-.home .recommend_success_box .seed_track .text .songs_text h2 {
-    font-size: 16px;
+.home .recommend_success_box .text .track-list .track-item .track-info {
+    display: flex;
+    align-items: center;
 }
