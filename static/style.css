@@ -200,21 +200,38 @@ body {
 
 .home .recommend_success_box .track-list {
     display: flex;
+    gap: 5px;
+}
+
+.home .recommend_success_box .track-covers {
+    display: flex;
     padding: 20px;
+    flex-direction: column;
+    
 }
 
-.home .recommend_success_box .track-list .cover_pic {
-    width: 75px;
-    height: 75px;
+.home .recommend_success_box .track-covers .cover_pic {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 20px;
 }
 
-.home .recommend_success_box .text .track-list .track-item {
+.home .recommend_success_box .track-list .track-info {
+    flex-grow: 1;
+}
+
+.home .recommend_success_box .track-list .track-info h1 {
+    margin-top: 20px;
+    font-size: 24px;
+}
+
+.home .recommend_success_box .track-list .track-info .artist-names {
     display: flex;
-    flex-direction: row;
-    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
 }
 
-.home .recommend_success_box .text .track-list .track-item .track-info {
-    display: flex;
-    align-items: center;
+.home .recommend_success_box .track-list .track-info .artist-names h2 {
+    font-size: 16px;
+    margin: 0;
 }

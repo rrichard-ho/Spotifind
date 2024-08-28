@@ -28,19 +28,28 @@
                 </div>
             </div>
                     
-
             <div class="track-list">
-                {% for track in list['tracks'] %}
-                <div class="track-item">
-                    <img src="{{ track['album']['images'][0]['url'] }}" alt="cover_pic" class="cover_pic">
+                <div class="track-covers">
+                    {% for track in list['tracks'] %}
+                        <img src="{{ track['album']['images'][0]['url'] }}" alt="cover_pic" class="cover_pic">
+                    {% endfor %}
+                </div>
 
-                    <div class="track-info">
-                        <h1>{{ track['name'] }}</h1>
-                        <!-- {% for artist in track['artists'] %}
+                <div class="track-info">
+                {% for track in list['tracks'] %}    
+                    <h1>{{ track['name'] }}</h1>
+
+                    <div class="artist-names">
+                        {% for artist in track['artists'] %}
                             <h2>{{ artist['name'] }}</h2>
-                        {% endfor %} -->
+                        {% endfor %}
                     </div>
+                    
+                    <audio controls>
+                        <source src="{{ track['preview_url'] }}" type="audio/mpeg">
+                    </audio>
                 {% endfor %}
+                
                 </div>
             </div>
         </div>
