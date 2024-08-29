@@ -59,8 +59,8 @@ def recommend():
     else:
         return render_template('recommend.html')
 
-@app.route('/<uri>')
-def recommend_success(uri):
+@app.route('/<uri>', methods=['GET', 'POST'])
+def recommend_success(uri, playlist=None):
     try:
         token_info = get_token()
     except:
@@ -71,9 +71,20 @@ def recommend_success(uri):
     seed_track = sp.track(track_id=uri)
     list = sp.recommendations(seed_tracks=[uri], limit=30)
 
-    # for idx, track in enumerate(list['tracks']):
-    #     print(f"{idx + 1}: {track['name']} by {track['artists'][0]['name']}")
+    if (playlist):
+        create_playlist(list)
+
     return render_template('recommend-success.html', seed_track=seed_track,list=list)
+
+def create_playlist(list):
+    try:
+        token_info = get_token()
+    except:
+        return redirect('/')
+    
+    sp = spotipy.Spotify(auth=token_info['access_token'])
+    sp.user_playlist_create(sp.current_user.get('id'),"test",public=False,description="test")
+    sp.playlist_add_items(list)
 
 @app.route('/stats')
 def stats():

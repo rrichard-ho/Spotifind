@@ -52,6 +52,11 @@
                 
                 </div>
             </div>
+
+            <form action="{{ url_for('recommend_success',uri=seed_track['uri'], playlist=True) }}" method="post">
+                <button type="submit">Create Playlist</button>
+            </form>
+
         </div>
     </div>
 </body>
