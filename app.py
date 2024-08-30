@@ -60,7 +60,7 @@ def recommend():
         return render_template('recommend.html')
 
 @app.route('/<uri>', methods=['GET', 'POST'])
-def recommend_success(uri, playlist=None):
+def recommend_success(uri):
     try:
         token_info = get_token()
     except:
@@ -69,22 +69,68 @@ def recommend_success(uri, playlist=None):
     sp = spotipy.Spotify(auth=token_info['access_token'])
 
     seed_track = sp.track(track_id=uri)
-    list = sp.recommendations(seed_tracks=[uri], limit=30)
+    recommendations = sp.recommendations(seed_tracks=[uri], limit=30)
 
-    if (playlist):
-        create_playlist(list)
+    if request.method == 'POST':
+        create_playlist(uri, recommendations)
+        return redirect(f'/{uri}?playlist_created=true')
 
-    return render_template('recommend-success.html', seed_track=seed_track,list=list)
+    return render_template('recommend-success.html', seed_track=seed_track,recommendations=recommendations)
 
-def create_playlist(list):
+def create_playlist(seed_track_uri, recommendations):
     try:
         token_info = get_token()
     except:
         return redirect('/')
     
     sp = spotipy.Spotify(auth=token_info['access_token'])
-    sp.user_playlist_create(sp.current_user.get('id'),"test",public=False,description="test")
-    sp.playlist_add_items(list)
+
+    seed_track = sp.track(seed_track_uri)
+    playlist_name = get_playlist_rec_name(seed_track['name'])
+    playlist_desc = get_playlist_rec_desc(seed_track['name'], seed_track['artists'][0]['name'])
+    sp.user_playlist_create(sp.current_user()['id'],name=playlist_name,public=False,description=playlist_desc)
+
+    current_playlists = sp.current_user_playlists()['items']
+    playlist_id = None
+    for playlist in current_playlists:
+        if playlist['name'] == "test":
+            playlist_id = playlist['id']
+            print(playlist_id)
+            break
+    
+    uri_list = []
+    for track in recommendations['tracks']:
+        uri_list.append(track['uri'])
+    print("URIs to be added to the playlist:", uri_list)
+    sp.playlist_add_items(playlist_id=playlist_id, items=uri_list)
+
+def get_playlist_rec_name(seed_track_name):
+    try:
+        token_info = get_token()
+    except:
+        return redirect('/')
+    
+    sp = spotipy.Spotify(auth=token_info['access_token'])
+    count = 2
+
+    base_name = "Spotifind " + seed_track_name.strip()
+    playlist_name = base_name
+
+    current_playlists = sp.current_user_playlists()['items']
+
+    existing_names = set()
+    for playlist in current_playlists:
+        existing_names.add(playlist['name'].strip())
+
+    while playlist_name in existing_names:
+        playlist_name = f"{base_name} #{count}"
+        count += 1
+    
+    return playlist_name
+
+def get_playlist_rec_desc(seed_track_name, seed_track_artist):
+    return f"Songs similar to {seed_track_name} by {seed_track_artist}"
+
 
 @app.route('/stats')
 def stats():

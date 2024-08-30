@@ -30,13 +30,13 @@
                     
             <div class="track-list">
                 <div class="track-covers">
-                    {% for track in list['tracks'] %}
+                    {% for track in recommendations['tracks'] %}
                         <img src="{{ track['album']['images'][0]['url'] }}" alt="cover_pic" class="cover_pic">
                     {% endfor %}
                 </div>
 
                 <div class="track-info">
-                {% for track in list['tracks'] %}    
+                {% for track in recommendations['tracks'] %}    
                     <h1>{{ track['name'] }}</h1>
 
                     <div class="artist-names">
@@ -53,9 +53,14 @@
                 </div>
             </div>
 
-            <form action="{{ url_for('recommend_success',uri=seed_track['uri'], playlist=True) }}" method="post">
+            <form action="" method="POST">
                 <button type="submit">Create Playlist</button>
             </form>
+        
+            <!-- Optional: Display a message if the playlist was created -->
+            {% if request.args.get('playlist_created') %}
+                <p>Playlist created successfully!</p>
+            {% endif %}
 
         </div>
     </div>

@@ -213,7 +213,7 @@ body {
 .home .recommend_success_box .track-covers .cover_pic {
     width: 100px;
     height: 100px;
-    margin-bottom: 20px;
+    margin-bottom: 22px;
 }
 
 .home .recommend_success_box .track-list .track-info {
@@ -228,7 +228,7 @@ body {
 .home .recommend_success_box .track-list .track-info .artist-names {
     display: flex;
     gap: 10px;
-    margin-bottom: 13px;
+    margin-bottom: 14px;
 }
 
 .home .recommend_success_box .track-list .track-info .artist-names h2 {
