@@ -235,3 +235,26 @@ body {
     font-size: 16px;
     margin: 0;
 }
+
+.home .recommend_success_box button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 40px;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    background: #1DB954;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+    color: #fff;
+    font-weight: 500;
+    cursor: pointer;
+    margin-bottom: 10px;
+    text-decoration: none;
+    font-size: 20px;
+    margin-left: 18px;
+}
+
+.home .recommend_success_box button:hover {
+    background: #248847;
+}

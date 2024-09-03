@@ -85,24 +85,31 @@ def create_playlist(seed_track_uri, recommendations):
     
     sp = spotipy.Spotify(auth=token_info['access_token'])
 
+    id = sp.current_user()['id']
+
     seed_track = sp.track(seed_track_uri)
     playlist_name = get_playlist_rec_name(seed_track['name'])
     playlist_desc = get_playlist_rec_desc(seed_track['name'], seed_track['artists'][0]['name'])
-    sp.user_playlist_create(sp.current_user()['id'],name=playlist_name,public=False,description=playlist_desc)
+    sp.user_playlist_create(id,name=playlist_name,public=True,description=playlist_desc)
 
     current_playlists = sp.current_user_playlists()['items']
     playlist_id = None
     for playlist in current_playlists:
-        if playlist['name'] == "test":
+        print(playlist['name'])
+        if playlist['name'] == playlist_name:
             playlist_id = playlist['id']
-            print(playlist_id)
+            print("WE FOUND IT")
             break
     
     uri_list = []
     for track in recommendations['tracks']:
         uri_list.append(track['uri'])
+        
     print("URIs to be added to the playlist:", uri_list)
-    sp.playlist_add_items(playlist_id=playlist_id, items=uri_list)
+    print("USER ID: ", id)
+    print("PLAYLIST ID: ", playlist_id)
+    sp.user_playlist_add_tracks(user=id, playlist_id=playlist_id, tracks=uri_list, position=None)
+    sp.user_playlist_change_details(user=id, playlist_id=playlist_id,public=False)
 
 def get_playlist_rec_name(seed_track_name):
     try:

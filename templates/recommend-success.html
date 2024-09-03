@@ -54,10 +54,9 @@
             </div>
 
             <form action="" method="POST">
-                <button type="submit">Create Playlist</button>
+                <button type="submit">Add to Spotify</button>
             </form>
         
-            <!-- Optional: Display a message if the playlist was created -->
             {% if request.args.get('playlist_created') %}
                 <p>Playlist created successfully!</p>
             {% endif %}
