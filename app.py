@@ -44,7 +44,6 @@ def home_page():
     current_user = sp.current_user()
     display_name = current_user.get('display_name')
     profile_pic = current_user.get('images')[0].get('url')
-    print(profile_pic)
     greeting = get_greeting()
 
     return render_template('index.html', greeting = greeting, user_name=display_name, pfp_link=profile_pic)
@@ -69,13 +68,14 @@ def recommend_success(uri):
     sp = spotipy.Spotify(auth=token_info['access_token'])
 
     seed_track = sp.track(track_id=uri)
+    seed_track_cover = seed_track['album']['images'][0]['url']
     recommendations = sp.recommendations(seed_tracks=[uri], limit=30)
 
     if request.method == 'POST':
         create_playlist(uri, recommendations)
         return redirect(f'/{uri}?playlist_created=true')
 
-    return render_template('recommend-success.html', seed_track=seed_track,recommendations=recommendations)
+    return render_template('recommend-success.html', seed_track=seed_track,recommendations=recommendations, seed_track_cover=seed_track_cover)
 
 def create_playlist(seed_track_uri, recommendations):
     try:

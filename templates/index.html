@@ -7,15 +7,20 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
+    <style>
+            body {
+                background-image: url('{{ pfp_link }}');
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: 60%;
+                background-position-x: 20%;
+            }
+    </style>
     <div class="home">
             <nav>
                 <h1><a href="{{ url_for('home_page') }}">Spotifind</a></h1>
             </nav>
-            <style>
-            body {
-                background-image: url('{{ pfp_link }}');
-            }
-            </style>
+            
         <div class="home_content">
             <h2>Good {{ greeting }}, {{ user_name }}</h2>
             <p>What would you like to do today?</p>
