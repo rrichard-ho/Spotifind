@@ -8,8 +8,8 @@ app = Flask(__name__)
 app.config['SESSION_COOKIE_NAME'] = 'cookie'
 app.secret_key = '{/FMO@^fUwD}ZMuA&DgV^lt}r+":#%'
 TOKEN_INFO = 'token_info'
-CLIENT_ID = '527201037c544da2886c1a92b00bfb3d'
-CLIENT_SECRET = 'c33daf1b48d147c1b503dcb98b6c454f'
+CLIENT_ID = 'CLIENT ID HERE'
+CLIENT_SECRET = 'CLIENT SECRET HERE'
 
 @app.route('/')
 def index():
